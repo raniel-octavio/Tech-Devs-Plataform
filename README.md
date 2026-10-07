@@ -30,5 +30,5 @@ TypeScript para tipagem
 Tailwind CSS para o estilo
 Supabase (PostgreSQL, Auth e Realtime) para dados, login e atualização em tempo real
 Vercel para hospedagem
----
+
 Feito pela equipe Tech Devs 🚀
