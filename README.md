@@ -9,7 +9,8 @@ Coding • Tech • Growth
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres-3ECF8E?logo=supabase&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
 
-Sobre
+Sobre:
+
 O Tech Devs Board é uma plataforma de gerenciamento de tarefas para times de desenvolvimento, com quadro Kanban, sprints, dashboard e comentários. Ele roda inteiramente no navegador (Next.js) e conversa direto com o Supabase (Postgres + Auth + Realtime).
 Isso significa que não existe servidor próprio para manter: você publica o front-end na Vercel, guarda os dados no Supabase e pronto.
 O visual segue a identidade da equipe: espaço escuro, azul elétrico e laranja de foguete.
@@ -31,7 +32,8 @@ Linguagem: TypeScript
 Estilo: Tailwind CSS 3 e Lucide Icons
 Dados e login: Supabase (Postgres, Auth, Realtime) via `@supabase/supabase-js`
 Hospedagem: Vercel
-Como funciona (sem backend)
+
+Como funciona
 ```text
 Navegador (Next.js)  -->  Supabase (Postgres + Auth + Realtime)
        ^
