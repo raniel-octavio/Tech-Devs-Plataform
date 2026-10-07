@@ -1,12 +1,14 @@
 Tech Devs Board 🚀
-Gestão de atividades da equipe, no estilo Jira. 100% front-end, sem backend para hospedar.
+Gestão de atividades da equipe, no estilo Jira.
 Coding • Tech • Growth
+
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres-3ECF8E?logo=supabase&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
+
 Sobre
 O Tech Devs Board é uma plataforma de gerenciamento de tarefas para times de desenvolvimento, com quadro Kanban, sprints, dashboard e comentários. Ele roda inteiramente no navegador (Next.js) e conversa direto com o Supabase (Postgres + Auth + Realtime).
 Isso significa que não existe servidor próprio para manter: você publica o front-end na Vercel, guarda os dados no Supabase e pronto.
