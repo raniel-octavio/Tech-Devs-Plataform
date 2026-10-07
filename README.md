@@ -16,6 +16,7 @@ Comentários nas tarefas
 Filtros e busca
 Atualização em tempo real
 Login por e-mail e senha
+
 Tecnologias
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
@@ -23,6 +24,7 @@ Tecnologias
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres-3ECF8E?logo=supabase&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
+
 Next.js 15 e React 19 para a interface
 TypeScript para tipagem
 Tailwind CSS para o estilo
