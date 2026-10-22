@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { KanbanSquare, LayoutDashboard, List, LogOut, Plus, Settings, X } from 'lucide-react';
+import { KanbanSquare, LayoutDashboard, List, LogOut, Plus, X } from 'lucide-react';
 import type { Profile, Project } from '@/lib/types';
 import { Avatar, displayName } from './Avatar';
 import { Logo } from './Logo';
@@ -172,18 +172,15 @@ export function Sidebar({
             ))}
           </div>
           <div className="flex items-center gap-2.5">
-            <div className="relative shrink-0">
+            <button
+              onClick={() => fileRef.current?.click()}
+              disabled={!me}
+              className="shrink-0 rounded-full transition hover:opacity-80 hover:ring-2 hover:ring-neon-cyan disabled:pointer-events-none"
+              title="Alterar foto de perfil"
+            >
               <Avatar profile={me} size={30} />
-              <button
-                onClick={() => fileRef.current?.click()}
-                disabled={!me}
-                className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-ink-700 bg-ink-800 text-slate-300 transition hover:bg-neon hover:text-white disabled:opacity-50"
-                title="Alterar foto de perfil"
-              >
-                <Settings size={10} />
-              </button>
-              <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
-            </div>
+            </button>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-slate-100">{displayName(me)}</p>
               <p className="truncate text-[11px] text-slate-500">{me?.email}</p>
