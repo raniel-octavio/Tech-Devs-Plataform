@@ -17,6 +17,18 @@ export function Avatar({ profile, size = 24 }: { profile?: Profile | null; size?
     );
   }
   const name = displayName(profile);
+  if (profile.avatar_url) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={profile.avatar_url}
+        alt={name}
+        title={name}
+        className="shrink-0 select-none rounded-full object-cover"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
   const initials = name
     .split(/\s+/)
     .slice(0, 2)

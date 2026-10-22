@@ -98,6 +98,8 @@ export function AppShell({ session }: { session: Session }) {
         profiles={ws.profiles}
         me={me}
         onLogout={() => supabase.auth.signOut()}
+        onAvatarChange={(url) => safe(() => ws.updateAvatar(session.user.id, url))}
+        onAvatarError={setToast}
         open={menuOpen}
         onCloseMobile={() => setMenuOpen(false)}
       />

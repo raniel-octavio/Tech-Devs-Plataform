@@ -1,6 +1,7 @@
 'use client';
 
-import { KanbanSquare, LayoutDashboard, List, LogOut, Plus, X } from 'lucide-react';
+import { useRef } from 'react';
+import { KanbanSquare, LayoutDashboard, List, LogOut, Plus, Settings, X } from 'lucide-react';
 import type { Profile, Project } from '@/lib/types';
 import { Avatar, displayName } from './Avatar';
 import { Logo } from './Logo';
@@ -13,6 +14,41 @@ const NAV: { id: View; label: string; icon: typeof List }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
 ];
 
+const AVATAR_PX = 128;
+
+// Recorta a imagem em quadrado e reduz para AVATAR_PX, retornando um data URL JPEG leve.
+function resizeImage(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const side = Math.min(img.width, img.height);
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = AVATAR_PX;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return reject(new Error('Não foi possível processar a imagem.'));
+      ctx.drawImage(
+        img,
+        (img.width - side) / 2,
+        (img.height - side) / 2,
+        side,
+        side,
+        0,
+        0,
+        AVATAR_PX,
+        AVATAR_PX,
+      );
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.85));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('Arquivo de imagem inválido.'));
+    };
+    img.src = url;
+  });
+}
+
 export function Sidebar({
   projects,
   selectedId,
@@ -23,6 +59,8 @@ export function Sidebar({
   profiles,
   me,
   onLogout,
+  onAvatarChange,
+  onAvatarError,
   open,
   onCloseMobile,
 }: {
@@ -35,9 +73,25 @@ export function Sidebar({
   profiles: Profile[];
   me?: Profile | null;
   onLogout: () => void;
+  onAvatarChange: (dataUrl: string) => void;
+  onAvatarError: (message: string) => void;
   open: boolean;
   onCloseMobile: () => void;
 }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return onAvatarError('Selecione um arquivo de imagem.');
+    try {
+      onAvatarChange(await resizeImage(file));
+    } catch (err) {
+      onAvatarError(err instanceof Error ? err.message : 'Falha ao carregar a imagem.');
+    }
+  }
+
   return (
     <>
       {open && <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={onCloseMobile} />}
@@ -118,7 +172,18 @@ export function Sidebar({
             ))}
           </div>
           <div className="flex items-center gap-2.5">
-            <Avatar profile={me} size={30} />
+            <div className="relative shrink-0">
+              <Avatar profile={me} size={30} />
+              <button
+                onClick={() => fileRef.current?.click()}
+                disabled={!me}
+                className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-ink-700 bg-ink-800 text-slate-300 transition hover:bg-neon hover:text-white disabled:opacity-50"
+                title="Alterar foto de perfil"
+              >
+                <Settings size={10} />
+              </button>
+              <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
+            </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-slate-100">{displayName(me)}</p>
               <p className="truncate text-[11px] text-slate-500">{me?.email}</p>

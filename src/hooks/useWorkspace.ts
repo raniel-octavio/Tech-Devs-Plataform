@@ -118,6 +118,18 @@ export function useWorkspace(projectId: string | null) {
     };
   }, []);
 
+  // ---- ações: perfil ----
+  const updateAvatar = useCallback(async (id: string, avatarUrl: string | null) => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ avatar_url: avatarUrl })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    setProfiles((prev) => upsert(prev, data as Profile));
+  }, []);
+
   // ---- ações: projetos ----
   const createProject = useCallback(
     async (input: { name: string; key: string; description: string | null }) => {
@@ -244,6 +256,7 @@ export function useWorkspace(projectId: string | null) {
     loading: baseLoading || dataLoading,
     baseLoading,
     error,
+    updateAvatar,
     createProject,
     updateProject,
     deleteProject,

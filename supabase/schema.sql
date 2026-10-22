@@ -15,6 +15,9 @@ create table if not exists public.profiles (
   created_at timestamptz not null default now()
 );
 
+-- Foto de perfil (data URL redimensionada no navegador)
+alter table public.profiles add column if not exists avatar_url text;
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql

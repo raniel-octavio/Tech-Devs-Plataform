@@ -8,6 +8,7 @@ export interface Profile {
   full_name: string | null;
   email: string | null;
   avatar_color: string | null;
+  avatar_url?: string | null;
 }
 
 export interface Project {
